@@ -1,0 +1,29 @@
+﻿@using CodeProject.MVC7Days.ViewModels
+@model CodeProject.MVC7Days.ViewModels.EmployeeListViewModel
+@{
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+@section TitleSection{
+    MyView
+}
+@section ContentBody{
+    <div>
+        @{
+            Html.RenderAction("GetAddNewLink");
+        }
+        <table border="1">
+            <tr>
+                <th>Employee Name</th>
+                <th>Salary</th>
+            </tr>
+            @foreach (EmployeeViewModel item in Model.Employees)
+            {
+                <tr>
+                    <td>@item.EmployeeName</td>
+                    <td style="background-color: @item.SalaryColor">@item.Salary</td>
+                    <td>@Html.ActionLink("View", "GetEmployeeById", new { pEmpId = @item.EmployeeId })</td>
+                </tr>
+            }
+        </table>
+    </div>
+}

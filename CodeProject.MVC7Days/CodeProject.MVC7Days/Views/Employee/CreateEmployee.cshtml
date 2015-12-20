@@ -1,0 +1,92 @@
+﻿@model CodeProject.MVC7Days.ViewModels.CreateEmployeeViewModel
+
+@{
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+@section TitleSection{
+    CreateEmployee
+}
+
+@section HeaderSection{
+    <script src="~/Scripts/Validations.js"></script>
+    <script>
+        function ResetForm() {
+            document.getElementById('TxtFName').value = "";
+            document.getElementById('TxtLName').value = "";
+            document.getElementById('TxtSalary').value = "";
+        }
+    </script>
+}
+@section ContentBody{
+<div>
+    <form action="/Employee/SaveEmployee" method="post" id="EmployeeForm">
+        <table>
+            <tr>
+                <td>
+                    First Name:
+                </td>
+                <td>
+                    <input type="text" id="TxtFName" name="FirstName" value="@Model.FirstName" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right">
+                    @Html.ValidationMessage("FirstName")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Last Name:
+                </td>
+                <td>
+                    <input type="text" id="TxtLName" name="LastName" value="@Model.LastName" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right">
+                    @Html.ValidationMessage("LastName")
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Salary:
+                </td>
+                <td>
+                    <input type="text" id="TxtSalary" name="Salary" value="@Model.Salary" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right">
+                    @Html.ValidationMessage("Salary")
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    @Html.AntiForgeryToken()
+                    <input type="submit" name="BtnSubmit" value="Save Employee" onclick="return IsValid();" />
+                    <input type="submit" name="BtnSubmit" value="Cancel" />
+                    <input type="button" name="BtnReset" value="Reset" onclick="ResetForm();" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+}
+
+@*----------3----------*@
+@*First Name: <input type="text" id="TxtFName" name="FName" value="" /><br />
+    Last Name: <input type="text" id="TxtLName" name="LName" value="" /><br />
+    Salary: <input type="text" id="TxtSalary" name="Salary" value="" /><br />*@
+
+@*----------1----------*@
+@*<input type="button" name="BtnSubmit" value="Cancel" onclick="document.getElementById('CancelForm').submit()" />*@
+
+@*----------2----------*@
+@*<input type="submit" name="BtnSubmit" value="Save Employee" onclick="document.getElementById('EmployeeForm').action = '/Employee/SaveEmployee'" />
+    <input type="submit" name="BtnSubmit" value="Cancel" onclick="document.getElementById('EmployeeForm').action = '/Employee/CancelSave'" />*@
+
+@*----------1*----------*@
+@*<form action="/Employee/CancelSave" id="CancelForm" method="get" style="display:none"></form>*@
